@@ -1,6 +1,8 @@
 ## VCD NSX-T Edge Gateway NAT Rules Terraform Module
 
-This Terraform module will create NAT rules for an existing NSX-T Edge Gateway in a VMware Cloud Director (VCD) environment using the `vmware/vcd` provider.
+This Terraform module will create NAT rules for an existing NSX-T Edge Gateway in a VMware Cloud Director (VCD) environment using the `vmware/vcd` provider.  This module can be used to provsion new NAT Rules into Rackspace Technology SDDC Flex VCD Data Center Regions.
+
+
 
 ## Requirements
 
