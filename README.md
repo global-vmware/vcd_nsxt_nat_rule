@@ -21,9 +21,9 @@ This Terraform module will create NAT rules for an existing NSX-T Edge Gateway i
 
 | Name                          | Description                                                          | Type   | Default           | Required |
 |-------------------------------|----------------------------------------------------------------------|--------|-------------------|----------|
-| vdc_group_name | Name of the Data Center Group | string | n/a | yes |
-| vdc_org_name | Name of the Data Center Group Organization | string | n/a | yes |
-| vdc_edge_name | Name of the NSX-T Edge Gateway | string | n/a | yes |
+| vdc_group_name | Name of the Data Center Group | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name> <datacenter group>"` | yes |
+| vdc_org_name | Name of the Data Center Group Organization | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name>"` | yes |
+| vdc_edge_name | Name of the Data Center Group Edge Gateway | string | `"Edge Gateway Name Format: <Account_Number>-<Region>-<Edge_GW_Identifier>-<edge>"` | yes |
 | nat_rules | Map of NAT rules to create | map(object({<br>&nbsp;&nbsp;rule_type = string<br>&nbsp;&nbsp;name = string<br>&nbsp;&nbsp;description = optional(string)<br>&nbsp;&nbsp;external_address = optional(string)<br>&nbsp;&nbsp;internal_address = optional(string)<br>&nbsp;&nbsp;snat_destination_address = optional(string)<br>&nbsp;&nbsp;dnat_external_port = optional(string)<br>&nbsp;&nbsp;app_port_profile_id = optional(string)<br>&nbsp;&nbsp;logging = optional(bool)<br>&nbsp;&nbsp;firewall_match = optional(string)<br>&nbsp;&nbsp;priority = optional(number)<br>})) | map | yes |
 
 ## Outputs
