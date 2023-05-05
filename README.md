@@ -38,21 +38,21 @@ This is an example of a `main.tf` file that uses the `"github.com/global-vmware/
 
 ```terraform
 module "vcd_nsxt_nat_rule" {
-  source                = "github.com/global-vmware/vcd_nsxt_nat_rule.git?ref=v1.1.0"
+  source                    = "github.com/global-vmware/vcd_nsxt_nat_rule.git?ref=v1.1.0"
   
-  vdc_org_name          = "<VDC-ORG-NAME>"
-  vdc_group_name        = "<VDC-GROUP-NAME>"
-  vdc_edge_name         = "<NSXT-EDGE-NAME>"
+  vdc_org_name              = "<VDC-ORG-NAME>"
+  vdc_group_name            = "<VDC-GROUP-NAME>"
+  vdc_edge_name             = "<NSXT-EDGE-NAME>"
 
   nat_rules = {
-    snat_rule = {
+    192.168.0.0/24_SNAT     = {
       rule_type             = "SNAT"
       name                  = "192.168.0.0/24_SNAT"
       external_address      = "8.8.8.8"
       internal_address      = "192.168.0.0/24"
       logging               = false
     },
-    dnat_rule = {
+    192.168.0.10_DNAT-HTTP  = {
       rule_type             = "DNAT"
       name                  = "192.168.0.10_DNAT-HTTP"
       external_address      = "8.8.8.8"
