@@ -40,7 +40,7 @@ This is an example of a `main.tf` file that uses the `"github.com/global-vmware/
 
 ```terraform
 module "vcd_nsxt_nat_rule" {
-  source                    = "github.com/global-vmware/vcd_nsxt_nat_rule.git?ref=v1.1.0"
+  source                    = "github.com/global-vmware/vcd_nsxt_nat_rule.git?ref=v1.2.0"
   
   vdc_org_name              = "<VDC-ORG-NAME>"
   vdc_group_name            = "<VDC-GROUP-NAME>"
