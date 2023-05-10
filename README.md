@@ -23,8 +23,8 @@ This Terraform module will create NAT rules for an existing NSX-T Edge Gateway i
 
 | Name                          | Description                                                          | Type   | Default           | Required |
 |-------------------------------|----------------------------------------------------------------------|--------|-------------------|----------|
-| vdc_group_name | Name of the Data Center Group | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name> <datacenter group>"` | yes |
-| vdc_org_name | Name of the Data Center Group Organization | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name>"` | yes |
+| vdc_org_name | The name of the Data Center Group Organization in VCD | string | `"Organization Name Format: <Account_Number>-<Region>-<Account_Name>"` | yes |
+| vdc_group_name | The name of the Data Center Group in VCD | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name> <datacenter group>"` | yes |
 | vdc_edge_name | Name of the Data Center Group Edge Gateway | string | `"Edge Gateway Name Format: <Account_Number>-<Region>-<Edge_GW_Identifier>-<edge>"` | yes |
 | nat_rules | Map of NAT rules to create | map(object({<br>&nbsp;&nbsp;rule_type = string<br>&nbsp;&nbsp;name = string<br>&nbsp;&nbsp;description = optional(string)<br>&nbsp;&nbsp;external_address = optional(string)<br>&nbsp;&nbsp;internal_address = optional(string)<br>&nbsp;&nbsp;snat_destination_address = optional(string)<br>&nbsp;&nbsp;dnat_external_port = optional(string)<br>&nbsp;&nbsp;app_port_profile_id = optional(string)<br>&nbsp;&nbsp;logging = optional(bool)<br>&nbsp;&nbsp;firewall_match = optional(string)<br>&nbsp;&nbsp;priority = optional(number)<br>})) | `{snat_rule = {rule_type = "SNAT", name = 192.168.0.0/24_SNAT, external_address = "8.8.8.8", internal_address = "192.168.0.0/24", logging = false}, dnat_rule = {rule_type = "SNAT", name = 192.168.0.10_DNAT-HTTP, external_address = "8.8.8.8", internal_address = "192.168.0.10", dnat_external_port = "80", logging = false}}` | no |
 
@@ -65,3 +65,7 @@ module "vcd_nsxt_nat_rule" {
   }
 }
 ```
+
+## Authors
+
+This module is maintained by the [Global VMware Cloud Automation Services Team](https://github.com/global-vmware).
