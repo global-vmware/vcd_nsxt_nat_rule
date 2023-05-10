@@ -49,16 +49,16 @@ module "vcd_nsxt_nat_rule" {
   nat_rules = {
     192.168.0.0/24_SNAT     = {
       rule_type             = "SNAT"
-      name                  = "192.168.0.0/24_SNAT"
+      name                  = "172.16.0.0/24_SNAT"
       external_address      = "8.8.8.8"
-      internal_address      = "192.168.0.0/24"
+      internal_address      = "172.16.0.0/24"
       logging               = false
     },
     192.168.0.10_DNAT-HTTP  = {
       rule_type             = "DNAT"
-      name                  = "192.168.0.10_DNAT-HTTP"
+      name                  = "172.16.0.10_DNAT-HTTP"
       external_address      = "8.8.8.8"
-      internal_address      = "192.168.0.10"
+      internal_address      = "172.16.0.10"
       dnat_external_port    = "80"
       logging               = false
     }
