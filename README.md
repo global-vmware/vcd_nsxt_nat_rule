@@ -40,9 +40,9 @@ This is an example of a `main.tf` file that uses the `"github.com/global-vmware/
 module "vcd_nsxt_nat_rule" {
   source                    = "github.com/global-vmware/vcd_nsxt_nat_rule.git?ref=v1.2.0"
   
-  vdc_org_name              = "<VDC-ORG-NAME>"
-  vdc_group_name            = "<VDC-GROUP-NAME>"
-  vdc_edge_name             = "<NSXT-EDGE-NAME>"
+  vdc_org_name              = "<US1-VDC-ORG-NAME>"
+  vdc_group_name            = "<US1-VDC-GRP-NAME>"
+  vdc_edge_name             = "<US1-VDC-EDGE-NAME>"
 
   nat_rules = {
     192.168.0.0/24_SNAT     = {
