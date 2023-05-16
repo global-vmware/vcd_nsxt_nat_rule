@@ -6,8 +6,8 @@ This Terraform module will deploy NSX-T Edge Gateway NAT Rules into an existing 
 
 | Name      | Version |
 |-----------|---------|
-| terraform | >= 1.2  |
-| vcd       | >= 3.8.2 |
+| terraform | ~> 1.2  |
+| vcd       | ~> 3.8.2 |
 
 ## Resources
 
