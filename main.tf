@@ -1,10 +1,10 @@
 terraform {
-  required_version = "~> 1.2"
+  required_version = ">= 1.2"
 
   required_providers {
     vcd = {
       source  = "vmware/vcd"
-      version = "~> 3.8"
+      version = ">= 3.8.2"
     }
   }
 }
@@ -27,9 +27,9 @@ resource "vcd_nsxt_nat_rule" "nat_rules" {
   org                       = var.vdc_org_name
   edge_gateway_id           = data.vcd_nsxt_edgegateway.t1.id
   name                      = each.value.name
-  rule_type                 = each.value.rule_type
-
   description               = each.value.description != null ? each.value.description : null
+  enabled                   = var.enabled
+  rule_type                 = each.value.rule_type
   external_address          = each.value.external_address != null ? each.value.external_address : null
   internal_address          = each.value.internal_address != null ? each.value.internal_address : null
   snat_destination_address  = each.value.rule_type == "SNAT" && each.value.snat_destination_address != null ? each.value.snat_destination_address : null
