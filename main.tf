@@ -11,6 +11,7 @@ terraform {
 
 # Create the Datacenter Group data source
 data "vcd_vdc_group" "dcgroup" {
+  org       = var.vdc_org_name
   name      = var.vdc_group_name
 }
 

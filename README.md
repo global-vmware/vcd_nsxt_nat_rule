@@ -1,6 +1,6 @@
 ## VCD NSX-T Edge Gateway NAT Rules Terraform Module
 
-This Terraform module will deploy NSX-T Edge Gateway NAT Rules into an existing VMware Cloud Director (VCD) Environment.  This module can be used to provsion new NAT Rules into [Rackspace Technology SDDC Flex](https://www.rackspace.com/cloud/private/software-defined-data-center-flex) VCD Data Center Regions.
+This Terraform module will deploy NSX-T Edge Gateway NAT Rules into an existing VMware Cloud Director (VCD) Environment.  This module can be used to provision new NAT Rules into [Rackspace Technology SDDC Flex](https://www.rackspace.com/cloud/private/software-defined-data-center-flex) VCD Data Center Regions.
 
 ## Requirements
 
@@ -38,7 +38,7 @@ This is an example of a `main.tf` file that uses the `"github.com/global-vmware/
 
 ```terraform
 module "vcd_nsxt_nat_rule" {
-  source                    = "github.com/global-vmware/vcd_nsxt_nat_rule.git?ref=v1.3.1"
+  source                    = "github.com/global-vmware/vcd_nsxt_nat_rule.git?ref=v1.3.2"
   
   vdc_org_name              = "<US1-VDC-ORG-NAME>"
   vdc_group_name            = "<US1-VDC-GRP-NAME>"
