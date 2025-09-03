@@ -1,6 +1,6 @@
 ## VCD NSX-T Edge Gateway NAT Rules Terraform Module
 
-This Terraform module will deploy NSX-T Edge Gateway NAT Rules into an existing VMware Cloud Director (VCD) Environment.  This module can be used to provision new NAT Rules into [Rackspace Technology SDDC Flex](https://www.rackspace.com/cloud/private/software-defined-data-center-flex) VCD Data Center Regions.
+This Terraform module will deploy NSX-T Edge Gateway NAT Rules into an existing VMware Cloud Director (VCD) Environment.  This module can be used to provision new NAT Rules into [Rackspace Technology SDDC Flex](https://www.rackspace.com/cloud/private/software-defined-data-center-flex) VCD Data Center Regions.  The module supports **SNAT**, **DNAT**, **NO_SNAT**, and **NO_DNAT** rule types.
 
 ## Requirements
 
@@ -24,7 +24,8 @@ This Terraform module will deploy NSX-T Edge Gateway NAT Rules into an existing 
 | vdc_org_name | The name of the Data Center Group Organization in VCD | string | `"Organization Name Format: <Account_Number>-<Region>-<Account_Name>"` | yes |
 | vdc_group_name | The name of the Data Center Group in VCD | string | `"Data Center Group Name Format: <Account_Number>-<Region>-<Account_Name> <datacenter group>"` | yes |
 | vdc_edge_name | Name of the Data Center Group Edge Gateway | string | `"Edge Gateway Name Format: <Account_Number>-<Region>-<Edge_GW_Identifier>-<edge>"` | yes |
-| nat_rules | Map of NAT rules to create | map(object({<br>&nbsp;&nbsp;rule_type = string<br>&nbsp;&nbsp;name = string<br>&nbsp;&nbsp;description = optional(string)<br>&nbsp;&nbsp;external_address = optional(string)<br>&nbsp;&nbsp;internal_address = optional(string)<br>&nbsp;&nbsp;snat_destination_address = optional(string)<br>&nbsp;&nbsp;dnat_external_port = optional(string)<br>&nbsp;&nbsp;app_port_profile_id = optional(string)<br>&nbsp;&nbsp;logging = optional(bool)<br>&nbsp;&nbsp;firewall_match = optional(string)<br>&nbsp;&nbsp;priority = optional(number)<br>})) | N/A | yes |
+| nat_rules | Map of NAT rules to create. Supported `rule_type` values: `SNAT`, `DNAT`, `NO_SNAT`, `NO_DNAT` | map(object({<br>&nbsp;&nbsp;rule_type = string<br>&nbsp;&nbsp;name = string<br>&nbsp;&nbsp;description = optional(string)<br>&nbsp;&nbsp;external_address = optional(string)<br>&nbsp;&nbsp;internal_address = optional(string)<br>&nbsp;&nbsp;snat_destination_address = optional(string)<br>&nbsp;&nbsp;dnat_external_port = optional(string)<br>&nbsp;&nbsp;app_port_profile_id = optional(string)<br>&nbsp;&nbsp;logging = optional(bool)<br>&nbsp;&nbsp;firewall_match = optional(string)<br>&nbsp;&nbsp;priority = optional(number)<br>})) | N/A | yes |
+snat_destination_address = optional(string)<br>&nbsp;&nbsp;dnat_external_port = optional(string)<br>&nbsp;&nbsp;app_port_profile_id = optional(string)<br>&nbsp;&nbsp;logging = optional(bool)<br>&nbsp;&nbsp;firewall_match = optional(string)<br>&nbsp;&nbsp;priority = optional(number)<br>})) | N/A | yes |
 
 ## Outputs
 
@@ -38,7 +39,7 @@ This is an example of a `main.tf` file that uses the `"github.com/global-vmware/
 
 ```terraform
 module "vcd_nsxt_nat_rule" {
-  source                    = "github.com/global-vmware/vcd_nsxt_nat_rule.git?ref=v1.3.2"
+  source                    = "github.com/global-vmware/vcd_nsxt_nat_rule.git?ref=v1.3.3"
   
   vdc_org_name              = "<US1-VDC-ORG-NAME>"
   vdc_group_name            = "<US1-VDC-GRP-NAME>"
@@ -55,6 +56,21 @@ module "vcd_nsxt_nat_rule" {
     "192.168.0.10_DNAT-HTTP"  = {
       rule_type             = "DNAT"
       name                  = "172.16.0.10_DNAT-HTTP"
+      external_address      = "8.8.8.8"
+      internal_address      = "172.16.0.10"
+      dnat_external_port    = "80"
+      logging               = false
+    },
+    "192.168.0.0/24_NO_SNAT" = {
+      rule_type             = "NO_SNAT"
+      name                  = "172.16.0.0/24_NO_SNAT"
+      internal_address      = "172.16.0.0/24"
+      snat_destination_address = "10.10.10.0/24"
+      logging               = false
+    },
+    "192.168.0.10_NO_DNAT" = {
+      rule_type             = "NO_DNAT"
+      name                  = "172.16.0.10_NO_DNAT"
       external_address      = "8.8.8.8"
       internal_address      = "172.16.0.10"
       dnat_external_port    = "80"

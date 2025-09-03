@@ -33,8 +33,8 @@ resource "vcd_nsxt_nat_rule" "nat_rules" {
   rule_type                 = each.value.rule_type
   external_address          = each.value.external_address != null ? each.value.external_address : null
   internal_address          = each.value.internal_address != null ? each.value.internal_address : null
-  snat_destination_address  = each.value.rule_type == "SNAT" && each.value.snat_destination_address != null ? each.value.snat_destination_address : null
-  dnat_external_port        = each.value.rule_type == "DNAT" && each.value.dnat_external_port != null ? each.value.dnat_external_port : null
+  snat_destination_address  = contains(["SNAT","NO_SNAT"], each.value.rule_type) && each.value.snat_destination_address != null ? each.value.snat_destination_address : null
+  dnat_external_port        = contains(["DNAT","NO_DNAT"], each.value.rule_type) && each.value.dnat_external_port != null ? each.value.dnat_external_port : null
   app_port_profile_id       = each.value.app_port_profile_id != null ? each.value.app_port_profile_id : null
   logging                   = each.value.logging != null ? each.value.logging : null
   firewall_match            = each.value.firewall_match != null ? each.value.firewall_match : null
