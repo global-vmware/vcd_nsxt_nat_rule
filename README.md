@@ -46,14 +46,14 @@ module "vcd_nsxt_nat_rule" {
   vdc_edge_name             = "<US1-VDC-EDGE-NAME>"
 
   nat_rules = {
-    "192.168.0.0/24_SNAT"     = {
+    "172.16.0.0/24_SNAT"     = {
       rule_type             = "SNAT"
       name                  = "172.16.0.0/24_SNAT"
       external_address      = "8.8.8.8"
       internal_address      = "172.16.0.0/24"
       logging               = false
     },
-    "192.168.0.10_DNAT-HTTP"  = {
+    "172.16.0.10_DNAT-HTTP"  = {
       rule_type             = "DNAT"
       name                  = "172.16.0.10_DNAT-HTTP"
       external_address      = "8.8.8.8"
@@ -61,18 +61,17 @@ module "vcd_nsxt_nat_rule" {
       dnat_external_port    = "80"
       logging               = false
     },
-    "192.168.0.0/24_NO_SNAT" = {
+    "172.16.0.0/24_NO_SNAT" = {
       rule_type             = "NO_SNAT"
       name                  = "172.16.0.0/24_NO_SNAT"
       internal_address      = "172.16.0.0/24"
       snat_destination_address = "10.10.10.0/24"
       logging               = false
     },
-    "192.168.0.10_NO_DNAT" = {
+    "8.8.8.8_NO_DNAT" = {
       rule_type             = "NO_DNAT"
-      name                  = "172.16.0.10_NO_DNAT"
+      name                  = "8.8.8.8_NO_DNAT"
       external_address      = "8.8.8.8"
-      internal_address      = "172.16.0.10"
       dnat_external_port    = "80"
       logging               = false
     }
